@@ -1,6 +1,9 @@
 
 # Vite SSR Starter
 Quickly build full-stack webapps with SSR using vitejs. This is a completely opinionated repo which I built for my own purposes.
+
+<img src="https://i.ibb.co/K94x0FT/screenshot-rocks.jpg" alt="screenshot-rocks" border="0" />
+
 It is built using following stack for linting, formatting, type-checking, authentication:
 
 1. vite-plugin-ssr
@@ -12,6 +15,7 @@ It is built using following stack for linting, formatting, type-checking, authen
 7. commit-lint
 8. chakra-ui
 9. next-auth
+10. lint-staged
 
 
 ## Usage
