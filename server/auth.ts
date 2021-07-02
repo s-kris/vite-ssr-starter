@@ -22,7 +22,7 @@ const authActions =
 
 const router = Router();
 
-/** Wraps `next-auth` so  */
+/** Compatibility layer for `next-auth` for `express` apps.  */
 export default function NextAuthMiddleware(options: NextAuthOptions) {
   return router
     .use(urlencoded({ extended: false }))
