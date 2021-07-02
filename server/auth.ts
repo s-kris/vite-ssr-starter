@@ -5,7 +5,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 
 /**
- * Should match one of the following:
+ * Should match the following paths:
  * /api/auth/signin
  * /api/auth/signin/:provider
  * /api/auth/callback/:provider
@@ -29,15 +29,12 @@ export default function NextAuthMiddleware(options: NextAuthOptions) {
     .use(json())
     .use(cookieParser())
     .all(authActions, (req: IncomingMessage, res: ServerResponse, next) => {
-      const authActions = ['session', 'signin', 'signout', 'callback', '_log'];
-      //@ts-ignore
-      if (authActions.some((action) => req.path.includes(action))) {
-        //@ts-ignore
-        req.query.nextauth = req.path.split('/').slice(3);
-        //@ts-ignore
-        NextAuth(req, res, options);
-        return;
+      if (req.method !== 'POST' && req.method !== 'GET') {
+        return next();
       }
-      next();
+      //@ts-ignore
+      req.query.nextauth = req.path.split('/').slice(3);
+      //@ts-ignore
+      NextAuth(req, res, options);
     });
 }
