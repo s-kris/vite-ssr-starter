@@ -58,5 +58,27 @@
       "yarn lint",
       "yarn format"
     ]
-  }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Sai Krishna",
+    "url": "https://twitter.com/_skris"
+  },
+  "repository": {
+    "url": "https://github.com/s-kris/vite-ssr-starter"
+  },
+  "description": "Opinionated modern vitejs ssr starter",
+  "keywords": [
+    "vitejs",
+    "vite-plugin-ssr",
+    "react",
+    "typescript",
+    "next-auth",
+    "chakra-ui",
+    "eslint",
+    "husky",
+    "lint-staged",
+    "prettier",
+    "commitlint"
+  ]
 }

@@ -16,6 +16,7 @@ const modules = [
   'Prettier',
   'Husky',
   'Commitlint',
+  'Lint-staged',
 ];
 
 const Root = styled(Flex)`
