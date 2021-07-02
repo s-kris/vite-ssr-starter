@@ -1,19 +1,30 @@
-import express from "express";
-import { createPageRender } from "vite-plugin-ssr";
+require('dotenv').config();
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import fetch from 'isomorphic-fetch';
+import { createPageRender } from 'vite-plugin-ssr';
 
-const isProduction = process.env.NODE_ENV === "production";
+import NextAuthHandler from './auth/next';
+
+global.fetch = fetch;
+
+const isProduction = process.env.NODE_ENV === 'production';
 const root = `${__dirname}/..`;
 
 startServer();
 
 async function startServer() {
   const app = express();
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+  app.use(cookieParser());
 
   let viteDevServer;
   if (isProduction) {
     app.use(express.static(`${root}/dist/client`, { index: false }));
   } else {
-    const vite = require("vite");
+    const vite = require('vite');
     viteDevServer = await vite.createServer({
       root,
       server: { middlewareMode: true },
@@ -22,7 +33,24 @@ async function startServer() {
   }
 
   const renderPage = createPageRender({ viteDevServer, isProduction, root });
-  app.get("*", async (req, res, next) => {
+
+  app.get('/api/auth/*', (req, res) => {
+    const nextauth = req.path.split('/');
+    nextauth.splice(0, 3);
+    req.query.nextauth = nextauth;
+
+    NextAuthHandler(req, res);
+  });
+
+  app.post('/api/auth/*', (req, res) => {
+    const nextauth = req.path.split('/');
+    nextauth.splice(0, 3);
+    req.query.nextauth = nextauth;
+
+    NextAuthHandler(req, res);
+  });
+
+  app.get('*', async (req, res, next) => {
     const url = req.originalUrl;
     const pageContext = {
       url,
