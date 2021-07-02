@@ -1,3 +1,4 @@
+import { Button, Heading } from '@chakra-ui/react';
 import { useSession } from 'next-auth/client';
 import React from 'react';
 
@@ -12,9 +13,9 @@ function Page() {
   if (session) {
     return (
       <>
-        <h1>Welcome {session.user?.name}</h1>
+        <Heading>Welcome {session.user?.name}</Heading>
         <a href="/api/auth/signout">
-          <button>Sign out</button>
+          <Button>Sign out</Button>
         </a>
       </>
     );
@@ -22,9 +23,9 @@ function Page() {
 
   return (
     <>
-      <h1>Who are you?</h1>
+      <Heading>Who are you?</Heading>
       <a href="/api/auth/signin">
-        <button>Sign in</button>
+        <Button>Sign in</Button>
       </a>
     </>
   );
