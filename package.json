@@ -21,6 +21,8 @@
     "vite-plugin-ssr": "^0.1.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/express": "^4.17.12",
     "@types/node": "^15.12.1",
     "@types/react": "^17.0.9",
