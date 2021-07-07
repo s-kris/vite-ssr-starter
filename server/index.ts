@@ -1,5 +1,6 @@
 require('dotenv').config();
 import express from 'express';
+import fetch from 'isomorphic-fetch';
 import Providers from 'next-auth/providers';
 import { createPageRender } from 'vite-plugin-ssr';
 
@@ -7,6 +8,8 @@ import NextAuth from './auth';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const root = `${__dirname}/..`;
+
+global.fetch = fetch;
 
 startServer();
 
